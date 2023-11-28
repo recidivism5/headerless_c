@@ -3,6 +3,10 @@ So you want to code C across multiple files without maintaining two copies of ea
 
 Put the following code at the top of all your .c files:
 ```c
+#pragma once //this is only needed if this file is included multiple times in one translation unit. but it's 2023 so you should probably just put it here regardless.
+#ifdef __INTELLISENSE__
+#undef INCLUDED //intellisense tries to be smart and grey out implementations based on files including this file. fuck that.
+#endif
 #ifdef INCLUDED
 #define INCLUDED 1
 #else
