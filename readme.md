@@ -60,3 +60,6 @@ Modern versions of GCC support a macro called `__INCLUDE_LEVEL__` that has the v
 Intellisense tries to be smart and grey out implementations based on files including this file. So we do an ifdef to stop that.
 
 This was inspired by https://github.com/milgra/headerlessc
+
+### Further notes:
+Visual Studio doesn't understand that our .c files are also effectively headers. So when we change a .c file, any .c file relying on that file will not automatically be recompiled. So we have to rebuild our project each time. Right clicking on our project -> Project Only -> Rebuild Only \[Project Name\] solves this problem, but is annoying to do every time we want to debug our project. Instead we want to just click the Debug play button at the top and have everything work. The only solution I've found is to go to Project Properties -> Build Events -> Pre-Build Event and add a command like `cd your_project_name_here.dir && del /s *.obj` to delete every object file in your main project. This works perfectly.
