@@ -49,3 +49,5 @@ Modern versions of GCC support a macro called `__INCLUDE_LEVEL__` that has the v
 #pragma once is only needed if this file is included multiple times in one translation unit. But it's 2023 so you should probably just use it regardless.
 
 Intellisense tries to be smart and grey out implementations based on files including this file. So we do an ifdef to stop that.
+
+This was inspired by https://github.com/milgra/headerlessc
