@@ -46,7 +46,7 @@ int randint(int n)
 ### Reasoning:
 Modern versions of GCC support a macro called `__INCLUDE_LEVEL__` that has the value of the include level, i.e. 0 when not included, nonzero when included. This would solve our problem but it is not available on MSVC and apparently is not very common in general. So instead we use the much more ubiquitous `#pragma push_macro(...)` macro to give us an include level stack. Of course, our `INCLUDED` value is only ever 0 or 1 with this solution but that's not an issue for our use case. This solution supports msvc, clang, gcc.
 
-#pragma once is only needed if this file is included multiple times in one translation unit. But it's 2023 so you should probably just use it regardless.
+`#pragma once` is only needed if this file is included multiple times in one translation unit. But it's 2023 so you should probably just use it regardless.
 
 Intellisense tries to be smart and grey out implementations based on files including this file. So we do an ifdef to stop that.
 
