@@ -61,5 +61,20 @@ Intellisense tries to be smart and grey out implementations based on files inclu
 
 This was inspired by https://github.com/milgra/headerlessc
 
-### Further notes:
+### Visual Studio recompile fix:
 Visual Studio doesn't understand that our .c files are also effectively headers. So when we change a .c file, any .c file relying on that file will not automatically be recompiled. So we have to rebuild our project each time. Right clicking on our project -> Project Only -> Rebuild Only \[Project Name\] solves this problem, but is annoying to do every time we want to debug our project. Instead we want to just click the Debug play button at the top and have everything work. The only solution I've found is to go to Project Properties -> Build Events -> Pre-Build Event and add a command like `cd your_project_name_here.dir && del /s *.obj` to delete every object file in your main project. This works perfectly.
+
+### typedef struct trick:
+If you're anything like me, you always wished C had C++ style syntax for struct declaration. Thankfully, we can get close by defining this macro:
+```c
+#define TSTRUCT(name)\
+typedef struct name name;\
+struct name
+```
+Now you can easily define a new type like so:
+```c
+TSTRUCT(Poop){
+    Poop *prev, *next; //recursion supported
+    int meme;
+};
+```
